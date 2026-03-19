@@ -48,32 +48,7 @@ Built as a portfolio project demonstrating:
 
 ## 🏗️ Architecture
 
-```mermaid
-flowchart TD
-    A[Client Browser] --> B[Frontend - Next.js]
-    B -->|API| C[FastAPI Backend]
-    C --> D[(SQLite Database)]
-
-    B --> B1[Landing Page]
-    B --> B2[Login Page]
-    B --> B3[Dashboard]
-    B --> B4[Tasks and Chatbot]
-
-    C --> C1[Tasks API]
-    C --> C2[Chat API]
-    C --> C3[Stats API]
-    C --> C4[History API]
-
-    classDef client fill:#6366f1,color:#ffffff;
-    classDef frontend fill:#10b981,color:#ffffff;
-    classDef backend fill:#f59e0b,color:#ffffff;
-    classDef db fill:#ef4444,color:#ffffff;
-
-    class A client;
-    class B,B1,B2,B3,B4 frontend;
-    class C,C1,C2,C3,C4 backend;
-    class D db;
-```
+![Architecture](./architecture.png)
 
 ---
 
