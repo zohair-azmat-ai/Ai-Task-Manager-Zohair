@@ -1,47 +1,97 @@
-# TaskAI — AI-Powered Task Manager
+# 🚀 TaskAI – AI-Powered Task Manager
 
 > A professional full-stack task management application with an AI chatbot, smart suggestions, and a beautiful dark dashboard. Built by **Zohair Azmat**.
 
+![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688?style=for-the-badge&logo=fastapi)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-3.0-38B2AC?style=for-the-badge&logo=tailwind-css)
+![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python)
+![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite)
+
 ---
 
-## Overview
+## 🎬 Demo Video
+
+[![TaskAI Demo](https://img.youtube.com/vi/_XYQGFO3ruk/maxresdefault.jpg)](https://www.youtube.com/watch?v=_XYQGFO3ruk)
+
+> Click the thumbnail above to watch the full demo on YouTube.
+
+---
+
+## 📖 Overview
 
 TaskAI is a modern, production-quality task manager that lets you manage your work through both a clean UI and natural language commands. The AI assistant understands commands like *"add finish report by friday"* or *"what should I do today?"* — and if no OpenAI key is configured, a smart rule-based engine handles everything seamlessly.
 
 Built as a portfolio project demonstrating:
-- Full-stack architecture (Next.js 14 + FastAPI)
-- AI/LLM integration with graceful fallback
-- Professional dark UI with responsive design
-- Clean code organization and best practices
+- 🏗️ Full-stack architecture (Next.js 14 + FastAPI)
+- 🤖 AI/LLM integration with graceful fallback
+- 🎨 Professional dark UI with responsive design
+- 🧹 Clean code organization and best practices
 
 ---
 
-## Features
+## ✨ Features
 
 | Feature | Details |
 |---------|---------|
-| **AI Chatbot** | Natural language task management. OpenAI GPT or smart rule-based fallback |
-| **Task CRUD** | Create, edit, delete, complete with priority, due dates, tags, categories |
-| **Smart Suggestions** | Overdue warnings, today's priorities, productivity recommendations |
-| **Dashboard Analytics** | Completion rate, stats cards, weekly progress |
-| **Activity History** | Full timeline of every create/update/delete/complete event |
-| **Search & Filters** | Filter by status, priority, category — search across title/description/tags |
-| **Demo Auth** | Protected routes with localStorage session |
-| **API Docs** | Auto-generated Swagger UI at `/docs` |
+| 🤖 **AI Chatbot** | Natural language task management. OpenAI GPT or smart rule-based fallback |
+| ✅ **Task CRUD** | Create, edit, delete, complete with priority, due dates, tags, categories |
+| 💡 **Smart Suggestions** | Overdue warnings, today's priorities, productivity recommendations |
+| 📊 **Dashboard Analytics** | Completion rate, stats cards, weekly progress |
+| 📜 **Activity History** | Full timeline of every create/update/delete/complete event |
+| 🔍 **Search & Filters** | Filter by status, priority, category — search across title/description/tags |
+| 🔐 **Demo Auth** | Protected routes with localStorage session |
+| 📚 **API Docs** | Auto-generated Swagger UI at `/docs` |
 
 ---
 
-## Screenshots
+## 🏛️ Architecture
 
 ```
-Landing Page → Login → Dashboard (Stats + Chatbot + Tasks + Suggestions) → Tasks → History
+┌─────────────────────────────────────────────────────────┐
+│                      CLIENT BROWSER                     │
+│                                                         │
+│   ┌─────────────────────────────────────────────────┐  │
+│   │          Frontend  (Next.js 14 + TypeScript)     │  │
+│   │    Landing → Login → Dashboard → Tasks → History │  │
+│   └────────────────────┬────────────────────────────┘  │
+│                        │  HTTP / REST API               │
+└────────────────────────┼────────────────────────────────┘
+                         ▼
+          ┌──────────────────────────────┐
+          │     Backend  (FastAPI)        │
+          │  /api/tasks  /api/chat        │
+          │  /api/stats  /api/history     │
+          └──────────┬───────────────────┘
+                     │
+          ┌──────────▼───────────────────┐
+          │      SQLite Database          │
+          │   tasks.db  (auto-created)    │
+          └──────────────────────────────┘
+                     │
+          ┌──────────▼───────────────────┐
+          │    AI Service                 │
+          │  OpenAI GPT  │  Rule Engine  │
+          └──────────────────────────────┘
 ```
-
-The dark UI features near-black backgrounds, indigo/violet accent gradients, glass-morphism cards, and smooth animations throughout.
 
 ---
 
-## Tech Stack
+## 🖼️ Screenshots
+
+### 🏠 Landing Page
+The dark hero page with gradient accents and animated feature highlights.
+
+### 🔑 Login Page
+Clean auth form with demo credentials — no registration required.
+
+### 📊 Dashboard
+Full-featured overview with stats cards, AI chatbot panel, smart suggestions, and activity feed — all in a collapsible sidebar layout.
+
+---
+
+## 🛠️ Tech Stack
 
 ### Frontend
 - **Next.js 14** — App Router, TypeScript
@@ -60,7 +110,7 @@ The dark UI features near-black backgrounds, indigo/violet accent gradients, gla
 
 ---
 
-## Quick Start
+## ⚡ Quick Start
 
 ### Prerequisites
 - Node.js 18+
@@ -72,8 +122,8 @@ The dark UI features near-black backgrounds, indigo/violet accent gradients, gla
 ### 1. Clone & Setup
 
 ```bash
-git clone https://github.com/zohairazmat/ai-task-manager-zohair.git
-cd ai-task-manager-zohair
+git clone https://github.com/zohair-azmat-ai/Ai-Task-Manager-Zohair.git
+cd Ai-Task-Manager-Zohair
 ```
 
 ---
@@ -135,7 +185,7 @@ Open **http://localhost:3000** and use the demo credentials:
 
 ---
 
-## Environment Variables
+## 🔧 Environment Variables
 
 ### Backend (`backend/.env`)
 
@@ -163,26 +213,26 @@ NEXT_PUBLIC_APP_NAME=TaskAI
 
 ---
 
-## AI Chatbot Commands
+## 🤖 AI Chatbot Commands
 
 The chatbot works with or without an OpenAI API key.
 
 | Command | Example | Action |
 |---------|---------|--------|
-| Add task | `add buy milk tomorrow` | Creates a task with due date |
-| Create task | `create finish report by friday` | Creates a task |
-| Show pending | `show pending tasks` | Lists pending tasks |
-| Show all | `show all tasks` | Lists all tasks |
-| Complete task | `complete gym workout` | Marks matching task done |
-| Delete task | `delete old meeting` | Deletes matching task |
-| Today's plan | `what should I do today?` | Smart priority suggestions |
-| Overdue | `show overdue tasks` | Lists overdue items |
-| Stats | `stats` | Productivity summary |
-| Help | `help` | Lists all commands |
+| ➕ Add task | `add buy milk tomorrow` | Creates a task with due date |
+| 📝 Create task | `create finish report by friday` | Creates a task |
+| 📋 Show pending | `show pending tasks` | Lists pending tasks |
+| 📂 Show all | `show all tasks` | Lists all tasks |
+| ✅ Complete task | `complete gym workout` | Marks matching task done |
+| 🗑️ Delete task | `delete old meeting` | Deletes matching task |
+| 🗓️ Today's plan | `what should I do today?` | Smart priority suggestions |
+| ⚠️ Overdue | `show overdue tasks` | Lists overdue items |
+| 📊 Stats | `stats` | Productivity summary |
+| ❓ Help | `help` | Lists all commands |
 
 ---
 
-## API Routes
+## 🔌 API Routes
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
@@ -199,7 +249,7 @@ The chatbot works with or without an OpenAI API key.
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 ai-task-manager-zohair/
@@ -243,7 +293,7 @@ ai-task-manager-zohair/
 │   │   └── index.ts               # TypeScript interfaces
 │   │
 │   ├── tailwind.config.ts
-│   ├── next.config.ts
+│   ├── next.config.js
 │   └── package.json
 │
 ├── backend/                        # FastAPI Python app
@@ -270,27 +320,56 @@ ai-task-manager-zohair/
 
 ---
 
-## Future Improvements
+## 🚀 Deployment
 
-- **Real Auth** — NextAuth.js or Clerk with JWT/sessions
-- **PostgreSQL** — Production database (just change `DATABASE_URL`)
-- **Kanban Board** — Drag-and-drop task columns
-- **Email Reminders** — Due date notifications via SendGrid
-- **Task Comments** — Per-task discussion thread
-- **Recurring Tasks** — Daily/weekly repeat
-- **Mobile App** — React Native companion
-- **Real-time Updates** — WebSocket for live chatbot responses
-- **Export** — Download tasks as CSV or PDF
-- **Calendar View** — Month/week task visualization
+### Frontend — Vercel
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
+
+1. Push repo to GitHub
+2. Import project in [Vercel](https://vercel.com)
+3. Set root directory to `frontend`
+4. Add env var: `NEXT_PUBLIC_API_URL=<your-backend-url>`
+5. Deploy — Vercel handles the rest
+
+### Backend — Hugging Face Spaces
+
+1. Create a new Space on [Hugging Face](https://huggingface.co/spaces)
+2. Select **Docker** as the SDK
+3. Push the `backend/` folder contents
+4. Add `OPENAI_API_KEY` as a Space secret (optional)
+5. Space URL becomes your FastAPI backend
 
 ---
 
-## About
+## 🔮 Future Improvements
 
-Built by **Zohair Azmat** as a portfolio project demonstrating full-stack web development with modern technologies and AI integration.
+- 🔐 **Real Auth** — NextAuth.js or Clerk with JWT/sessions
+- 🐘 **PostgreSQL** — Production database (just change `DATABASE_URL`)
+- 📌 **Kanban Board** — Drag-and-drop task columns
+- 📧 **Email Reminders** — Due date notifications via SendGrid
+- 💬 **Task Comments** — Per-task discussion thread
+- 🔁 **Recurring Tasks** — Daily/weekly repeat
+- 📱 **Mobile App** — React Native companion
+- ⚡ **Real-time Updates** — WebSocket for live chatbot responses
+- 📤 **Export** — Download tasks as CSV or PDF
+- 📅 **Calendar View** — Month/week task visualization
 
-- **GitHub:** github.com/zohairazmat
-- **Stack:** Next.js · TypeScript · FastAPI · Python · SQLAlchemy · OpenAI · Tailwind CSS
+---
+
+## 👤 Author
+
+<table>
+  <tr>
+    <td align="center">
+      <b>Zohair Azmat</b><br/>
+      Full-Stack Developer & AI Enthusiast<br/>
+      <a href="https://github.com/zohair-azmat-ai">GitHub</a>
+    </td>
+  </tr>
+</table>
+
+**Stack:** Next.js · TypeScript · FastAPI · Python · SQLAlchemy · OpenAI · Tailwind CSS
 
 ---
 
