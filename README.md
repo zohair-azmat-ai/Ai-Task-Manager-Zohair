@@ -46,42 +46,33 @@ Built as a portfolio project demonstrating:
 
 ---
 
-## 🏛️ Architecture
+## 🏗️ Architecture
 
 ```mermaid
 flowchart TD
-    A[🌐 Client Browser]:::client --> B[⚡ Frontend - Next.js]:::frontend
-    B -->|API Calls| C[🚀 FastAPI Backend]:::backend
-    C --> D[(🗄️ SQLite DB)]:::db
+    A[Client Browser] --> B[Frontend - Next.js]
+    B -->|API| C[FastAPI Backend]
+    C --> D[(SQLite Database)]
 
-    subgraph Frontend
-        B1[Landing]
-        B2[Login]
-        B3[Dashboard]
-        B4[Tasks + Chatbot]
-    end
+    B --> B1[Landing Page]
+    B --> B2[Login Page]
+    B --> B3[Dashboard]
+    B --> B4[Tasks and Chatbot]
 
-    B --> B1
-    B --> B2
-    B --> B3
-    B --> B4
+    C --> C1[Tasks API]
+    C --> C2[Chat API]
+    C --> C3[Stats API]
+    C --> C4[History API]
 
-    subgraph Backend
-        C1[/api/tasks]
-        C2[/api/chat]
-        C3[/api/stats]
-        C4[/api/history]
-    end
+    classDef client fill:#6366f1,color:#ffffff;
+    classDef frontend fill:#10b981,color:#ffffff;
+    classDef backend fill:#f59e0b,color:#ffffff;
+    classDef db fill:#ef4444,color:#ffffff;
 
-    C --> C1
-    C --> C2
-    C --> C3
-    C --> C4
-
-    classDef client fill:#6366f1,color:#fff,stroke:#4338ca,stroke-width:2px;
-    classDef frontend fill:#10b981,color:#fff,stroke:#047857,stroke-width:2px;
-    classDef backend fill:#f59e0b,color:#fff,stroke:#b45309,stroke-width:2px;
-    classDef db fill:#ef4444,color:#fff,stroke:#991b1b,stroke-width:2px;
+    class A client;
+    class B,B1,B2,B3,B4 frontend;
+    class C,C1,C2,C3,C4 backend;
+    class D db;
 ```
 
 ---
