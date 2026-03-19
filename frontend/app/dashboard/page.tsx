@@ -10,7 +10,6 @@ import ChatbotPanel from "@/components/chatbot/ChatbotPanel";
 import TaskList from "@/components/tasks/TaskList";
 import TaskForm from "@/components/tasks/TaskForm";
 import {
-  getDashboardStats,
   getSmartSuggestions,
   getActivityLog,
   getTasks,
@@ -19,6 +18,7 @@ import {
   completeTask,
   deleteTask,
 } from "@/lib/api";
+import { isOverdue } from "@/lib/utils";
 import type {
   DashboardStats,
   SmartSuggestion,
@@ -27,41 +27,92 @@ import type {
   TaskCreate,
 } from "@/types";
 
+// Compute dashboard stats entirely from the task list — no /stats endpoint needed
+function computeStats(tasks: Task[]): DashboardStats {
+  const total = tasks.length;
+  const completed = tasks.filter((t) => t.status === "completed").length;
+  const pending = tasks.filter((t) => t.status === "pending").length;
+  const inProgress = tasks.filter((t) => t.status === "in_progress").length;
+  const overdue = tasks.filter((t) => isOverdue(t.due_date, t.status)).length;
+  const completionRate = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+  const sevenDaysAgo = new Date();
+  sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+  const recentCompletions = tasks.filter(
+    (t) =>
+      t.status === "completed" &&
+      t.completed_at &&
+      new Date(t.completed_at) >= sevenDaysAgo
+  ).length;
+
+  const tasksByPriority = tasks.reduce<Record<string, number>>((acc, t) => {
+    acc[t.priority] = (acc[t.priority] || 0) + 1;
+    return acc;
+  }, {});
+
+  const tasksByCategory = tasks.reduce<Record<string, number>>((acc, t) => {
+    if (t.category) acc[t.category] = (acc[t.category] || 0) + 1;
+    return acc;
+  }, {});
+
+  return {
+    total_tasks: total,
+    completed_tasks: completed,
+    pending_tasks: pending,
+    in_progress_tasks: inProgress,
+    overdue_tasks: overdue,
+    completion_rate: completionRate,
+    tasks_by_priority: tasksByPriority,
+    tasks_by_category: tasksByCategory,
+    recent_completions: recentCompletions,
+  };
+}
+
+const EMPTY_STATS: DashboardStats = {
+  total_tasks: 0, completed_tasks: 0, pending_tasks: 0,
+  in_progress_tasks: 0, overdue_tasks: 0, completion_rate: 0,
+  tasks_by_priority: {}, tasks_by_category: {}, recent_completions: 0,
+};
+
 export default function DashboardPage() {
-  const [stats, setStats] = useState<DashboardStats | null>(null);
+  const [allTasks, setAllTasks] = useState<Task[]>([]);
   const [suggestions, setSuggestions] = useState<SmartSuggestion[]>([]);
   const [activity, setActivity] = useState<ActivityLog[]>([]);
-  const [recentTasks, setRecentTasks] = useState<Task[]>([]);
-  const [loadingStats, setLoadingStats] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [loadingActivity, setLoadingActivity] = useState(true);
-  const [loadingTasks, setLoadingTasks] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
   const [error, setError] = useState("");
 
-  const loadAll = useCallback(async () => {
+  // Primary fetch — same pattern as Tasks page (which works)
+  const loadTasks = useCallback(async () => {
     setError("");
     try {
-      const [statsData, suggestionsData, activityData, tasksData] =
-        await Promise.all([
-          getDashboardStats(),
-          getSmartSuggestions(),
-          getActivityLog(10),
-          getTasks({ status: "pending" }),
-        ]);
-      setStats(statsData);
-      setSuggestions(suggestionsData);
-      setActivity(activityData);
-      setRecentTasks(tasksData.slice(0, 5));
+      const data = await getTasks();
+      setAllTasks(data);
     } catch {
-      setError(
-        "⚠️ Cannot connect to backend. Check that the backend service is running and NEXT_PUBLIC_API_URL is set correctly."
-      );
+      setError("⚠️ Cannot connect to backend. Ensure NEXT_PUBLIC_API_URL is set in Vercel and the backend is running.");
     }
-    setLoadingStats(false);
-    setLoadingActivity(false);
-    setLoadingTasks(false);
+    setLoading(false);
   }, []);
+
+  // Secondary fetches — isolated so failures don't break the main view
+  const loadSecondary = useCallback(async () => {
+    setLoadingActivity(true);
+    const [suggestionsResult, activityResult] = await Promise.allSettled([
+      getSmartSuggestions(),
+      getActivityLog(10),
+    ]);
+    if (suggestionsResult.status === "fulfilled") setSuggestions(suggestionsResult.value);
+    if (activityResult.status === "fulfilled") setActivity(activityResult.value);
+    setLoadingActivity(false);
+  }, []);
+
+  const loadAll = useCallback(async () => {
+    setLoading(true);
+    await loadTasks();
+    loadSecondary(); // fire-and-forget — doesn't block tasks display
+  }, [loadTasks, loadSecondary]);
 
   useEffect(() => {
     loadAll();
@@ -89,6 +140,12 @@ export default function DashboardPage() {
     await loadAll();
   };
 
+  // Derived data — computed from allTasks, no extra API call needed
+  const stats = computeStats(allTasks);
+  const pendingTasks = allTasks
+    .filter((t) => t.status === "pending")
+    .slice(0, 5);
+
   return (
     <>
       <Header
@@ -97,36 +154,32 @@ export default function DashboardPage() {
       />
 
       <div className="p-6 space-y-6">
-        {/* Error banner */}
+        {/* Error banner — only shown on actual fetch failure */}
         {error && (
           <div className="bg-accent-warning/10 border border-accent-warning/30 rounded-xl p-4 text-accent-warning text-sm">
             {error}
           </div>
         )}
 
-        {/* Stats */}
-        {stats ? (
-          <StatsCards stats={stats} />
-        ) : (
-          <StatsCards stats={{
-            total_tasks: 0, completed_tasks: 0, pending_tasks: 0,
-            in_progress_tasks: 0, overdue_tasks: 0, completion_rate: 0,
-            tasks_by_priority: {}, tasks_by_category: {}, recent_completions: 0,
-          }} loading={loadingStats} />
-        )}
+        {/* Stats — computed from tasks, always accurate */}
+        <StatsCards stats={stats} loading={loading} />
 
         {/* Main grid */}
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-          {/* Left column — tasks + chatbot */}
+          {/* Left column — chatbot + pending tasks */}
           <div className="xl:col-span-2 space-y-6">
-            {/* Chatbot */}
             <ChatbotPanel onTaskChange={loadAll} />
 
-            {/* Pending Tasks preview */}
+            {/* Pending Tasks */}
             <div className="glass-card p-5">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="font-semibold text-text-primary text-sm">
                   Pending Tasks
+                  {!loading && (
+                    <span className="ml-2 text-text-muted font-normal">
+                      ({pendingTasks.length})
+                    </span>
+                  )}
                 </h2>
                 <div className="flex items-center gap-2">
                   <button
@@ -149,8 +202,8 @@ export default function DashboardPage() {
                 </div>
               </div>
               <TaskList
-                tasks={recentTasks}
-                loading={loadingTasks}
+                tasks={pendingTasks}
+                loading={loading}
                 onComplete={handleComplete}
                 onDelete={handleDelete}
                 onEdit={(task) => {
@@ -159,12 +212,12 @@ export default function DashboardPage() {
                 }}
                 emptyMessage="No pending tasks — you're all caught up!"
               />
-              {recentTasks.length > 0 && (
+              {allTasks.length > 0 && (
                 <a
                   href="/dashboard/tasks"
                   className="block text-center text-accent-primary text-sm mt-4 hover:text-accent-secondary transition-colors"
                 >
-                  View all tasks →
+                  View all {allTasks.length} tasks →
                 </a>
               )}
             </div>
@@ -174,13 +227,13 @@ export default function DashboardPage() {
           <div className="space-y-6">
             <SmartSuggestions
               suggestions={suggestions}
-              loading={loadingStats}
-              onRefresh={loadAll}
+              loading={loadingActivity}
+              onRefresh={loadSecondary}
             />
             <ActivityLogPanel
               logs={activity}
               loading={loadingActivity}
-              onRefresh={loadAll}
+              onRefresh={loadSecondary}
             />
           </div>
         </div>
