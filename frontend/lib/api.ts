@@ -15,10 +15,14 @@ import type {
   FilterState,
 } from "@/types";
 
+// NEXT_PUBLIC_API_URL: set to your backend URL in .env.local (dev) or Vercel env vars (prod)
+// e.g. https://zohairazmat-ai-task-manager-backend.hf.space
+const BASE_URL = (process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000") + "/api";
+
 const api = axios.create({
-  baseURL: "/api",
+  baseURL: BASE_URL,
   headers: { "Content-Type": "application/json" },
-  timeout: 10000,
+  timeout: 15000,
 });
 
 // ─── Tasks ────────────────────────────────────────────────────────────────────
