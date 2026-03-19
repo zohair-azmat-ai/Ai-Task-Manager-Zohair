@@ -13,7 +13,14 @@ from app.routers import tasks, chatbot, stats, history
 
 load_dotenv()
 
-FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:3000")
+# FRONTEND_URL can be a comma-separated list of allowed origins, or "*" for all
+_frontend_env = os.getenv("FRONTEND_URL", "http://localhost:3000")
+if _frontend_env == "*":
+    ALLOW_ORIGINS = ["*"]
+else:
+    ALLOW_ORIGINS = list({
+        url.strip() for url in _frontend_env.split(",")
+    } | {"http://localhost:3000", "http://127.0.0.1:3000"})
 
 app = FastAPI(
     title="AI Task Manager API",
@@ -23,11 +30,11 @@ app = FastAPI(
     redoc_url="/redoc",
 )
 
-# CORS — allow frontend
+# CORS — allow frontend(s)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[FRONTEND_URL, "http://localhost:3000", "http://127.0.0.1:3000"],
-    allow_credentials=True,
+    allow_origins=ALLOW_ORIGINS,
+    allow_credentials=ALLOW_ORIGINS != ["*"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -45,7 +52,8 @@ async def on_startup():
     init_db()
     print("Database initialized")
     print("AI Task Manager API running")
-    print("Docs: http://127.0.0.1:8000/docs")
+    port = os.getenv("PORT", "8000")
+    print(f"Docs: http://0.0.0.0:{port}/docs")
 
 
 @app.get("/")

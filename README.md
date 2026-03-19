@@ -296,23 +296,84 @@ ai-task-manager-zohair/
 
 ## 🚀 Deployment
 
-### Frontend — Vercel
+> **Deploy order: Backend first, then Frontend.**
+> You need the backend URL before configuring the frontend.
+
+---
+
+### Step 1 — Deploy Backend on Hugging Face Spaces
+
+1. Go to [huggingface.co/spaces](https://huggingface.co/spaces) → **Create new Space**
+2. Set **SDK** to `Docker`
+3. Clone the new Space repo and copy the contents of the `backend/` folder into its root:
+   ```
+   backend/Dockerfile
+   backend/requirements.txt
+   backend/app/
+   backend/README.md   ← rename this to README.md at the Space root
+   ```
+4. Push to the Space repo — it will auto-build using the `Dockerfile`
+5. In your Space → **Settings → Repository secrets**, add:
+
+   | Secret | Value |
+   |--------|-------|
+   | `OPENAI_API_KEY` | Your OpenAI key (optional) |
+   | `FRONTEND_URL` | Your Vercel URL (set this after step 2, or use `*`) |
+   | `SECRET_KEY` | Any long random string |
+
+6. Your backend URL will be:
+   ```
+   https://<your-username>-<space-name>.hf.space
+   ```
+   Test it: `https://<your-backend-url>/health` should return `{"status":"healthy"}`
+
+---
+
+### Step 2 — Deploy Frontend on Vercel
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
 
-1. Push repo to GitHub
-2. Import project in [Vercel](https://vercel.com)
-3. Set root directory to `frontend`
-4. Add env var: `NEXT_PUBLIC_API_URL=<your-backend-url>`
-5. Deploy — Vercel handles the rest
+1. Go to [vercel.com](https://vercel.com) → **New Project** → import this GitHub repo
+2. Set **Root Directory** to `frontend`
+3. Add these **Environment Variables** in Vercel:
 
-### Backend — Hugging Face Spaces
+   | Variable | Value |
+   |----------|-------|
+   | `BACKEND_URL` | `https://<your-username>-<space-name>.hf.space` |
 
-1. Create a new Space on [Hugging Face](https://huggingface.co/spaces)
-2. Select **Docker** as the SDK
-3. Push the `backend/` folder contents
-4. Add `OPENAI_API_KEY` as a Space secret (optional)
-5. Space URL becomes your FastAPI backend
+4. Click **Deploy**
+5. Copy your Vercel URL (e.g. `https://your-app.vercel.app`)
+
+---
+
+### Step 3 — Connect Backend CORS to Frontend
+
+Go back to your Hugging Face Space secrets and update:
+
+| Secret | Value |
+|--------|-------|
+| `FRONTEND_URL` | `https://your-app.vercel.app` |
+
+Restart the Space — done.
+
+---
+
+### Environment Variables Summary
+
+**Backend (Hugging Face Secrets)**
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `FRONTEND_URL` | Yes | Your Vercel URL for CORS |
+| `SECRET_KEY` | Yes | Random secret string |
+| `OPENAI_API_KEY` | Optional | Enables GPT; falls back to rule engine |
+| `DATABASE_URL` | Optional | Defaults to `sqlite:///./tasks.db` |
+
+**Frontend (Vercel Environment Variables)**
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `BACKEND_URL` | Yes | Your Hugging Face Spaces backend URL |
 
 ---
 
