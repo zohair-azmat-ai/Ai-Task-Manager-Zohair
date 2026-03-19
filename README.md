@@ -48,32 +48,40 @@ Built as a portfolio project demonstrating:
 
 ## 🏛️ Architecture
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                      CLIENT BROWSER                     │
-│                                                         │
-│   ┌─────────────────────────────────────────────────┐  │
-│   │          Frontend  (Next.js 14 + TypeScript)     │  │
-│   │    Landing → Login → Dashboard → Tasks → History │  │
-│   └────────────────────┬────────────────────────────┘  │
-│                        │  HTTP / REST API               │
-└────────────────────────┼────────────────────────────────┘
-                         ▼
-          ┌──────────────────────────────┐
-          │     Backend  (FastAPI)        │
-          │  /api/tasks  /api/chat        │
-          │  /api/stats  /api/history     │
-          └──────────┬───────────────────┘
-                     │
-          ┌──────────▼───────────────────┐
-          │      SQLite Database          │
-          │   tasks.db  (auto-created)    │
-          └──────────────────────────────┘
-                     │
-          ┌──────────▼───────────────────┐
-          │    AI Service                 │
-          │  OpenAI GPT  │  Rule Engine  │
-          └──────────────────────────────┘
+```mermaid
+flowchart TD
+    A[🌐 Client Browser]:::client --> B[⚡ Frontend - Next.js]:::frontend
+    B -->|API Calls| C[🚀 FastAPI Backend]:::backend
+    C --> D[(🗄️ SQLite DB)]:::db
+
+    subgraph Frontend
+        B1[Landing]
+        B2[Login]
+        B3[Dashboard]
+        B4[Tasks + Chatbot]
+    end
+
+    B --> B1
+    B --> B2
+    B --> B3
+    B --> B4
+
+    subgraph Backend
+        C1[/api/tasks]
+        C2[/api/chat]
+        C3[/api/stats]
+        C4[/api/history]
+    end
+
+    C --> C1
+    C --> C2
+    C --> C3
+    C --> C4
+
+    classDef client fill:#6366f1,color:#fff,stroke:#4338ca,stroke-width:2px;
+    classDef frontend fill:#10b981,color:#fff,stroke:#047857,stroke-width:2px;
+    classDef backend fill:#f59e0b,color:#fff,stroke:#b45309,stroke-width:2px;
+    classDef db fill:#ef4444,color:#fff,stroke:#991b1b,stroke-width:2px;
 ```
 
 ---
