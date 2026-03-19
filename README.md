@@ -2,18 +2,25 @@
 
 > A professional full-stack task management application with an AI chatbot, smart suggestions, and a beautiful dark dashboard. Built by **Zohair Azmat**.
 
-<!-- Deployment badges -->
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-taskai--zohair.vercel.app-6366f1?style=for-the-badge)](https://taskai-zohair.vercel.app/)
-[![Backend API](https://img.shields.io/badge/🤗_Backend_API-HuggingFace_Spaces-FF9D00?style=for-the-badge)](https://zohairazmat-ai-task-manager-backend.hf.space)
-[![API Docs](https://img.shields.io/badge/📚_API_Docs-Swagger_UI-009688?style=for-the-badge)](https://zohairazmat-ai-task-manager-backend.hf.space/docs)
+✅ **Live Full-Stack AI Task Manager deployed on Vercel + Hugging Face Spaces**
 
-<!-- Stack badges -->
-![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688?style=for-the-badge&logo=fastapi)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript)
-![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-3.0-38B2AC?style=for-the-badge&logo=tailwind-css)
-![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python)
-![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite)
+<br/>
+
+<!-- 🌐 Live Deployment Badges -->
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-6366f1?style=for-the-badge&logo=vercel&logoColor=white)](https://taskai-zohair.vercel.app/)
+[![Backend API](https://img.shields.io/badge/Backend%20API-HuggingFace-FF9D00?style=for-the-badge&logo=huggingface&logoColor=white)](https://zohairazmat-ai-task-manager-backend.hf.space)
+[![API Docs](https://img.shields.io/badge/API%20Docs-Swagger%20UI-009688?style=for-the-badge&logo=swagger&logoColor=white)](https://zohairazmat-ai-task-manager-backend.hf.space/docs)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/zohair-azmat-ai/Ai-Task-Manager-Zohair)
+
+<br/>
+
+<!-- 🛠️ Tech Stack Badges -->
+![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-3.0-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-Database-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
 
 ---
 
