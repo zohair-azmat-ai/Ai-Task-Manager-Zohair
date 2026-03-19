@@ -87,10 +87,10 @@ export default function ChatbotPanel({ onTaskChange }: ChatbotPanelProps) {
 
       setMessages((prev) => [...prev, assistantMessage]);
 
-      // Refresh task list if a task was modified
+      // Refresh task list and stats if a task was modified
       if (
         response.action &&
-        ["task_created", "task_completed", "task_deleted"].includes(
+        ["task_created", "task_completed", "task_deleted", "task_updated"].includes(
           response.action
         )
       ) {
@@ -103,7 +103,7 @@ export default function ChatbotPanel({ onTaskChange }: ChatbotPanelProps) {
           id: (Date.now() + 1).toString(),
           role: "assistant",
           content:
-            "⚠️ Couldn't connect to the backend. Make sure the FastAPI server is running on port 8000.",
+            "⚠️ Couldn't connect to the backend. Please try again in a moment.",
           timestamp: new Date(),
         },
       ]);

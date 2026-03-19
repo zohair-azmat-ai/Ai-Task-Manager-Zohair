@@ -15,14 +15,17 @@ import type {
   FilterState,
 } from "@/types";
 
-// NEXT_PUBLIC_API_URL: set to your backend URL in .env.local (dev) or Vercel env vars (prod)
-// e.g. https://zohairazmat-ai-task-manager-backend.hf.space
+// NEXT_PUBLIC_API_URL must be set in Vercel env vars before deploying.
+// Local dev: set in frontend/.env.local
+// Production: set in Vercel → Project Settings → Environment Variables
+//   NEXT_PUBLIC_API_URL=https://zohairazmat-ai-task-manager-backend.hf.space
 const BASE_URL = (process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000") + "/api";
 
 const api = axios.create({
   baseURL: BASE_URL,
   headers: { "Content-Type": "application/json" },
-  timeout: 15000,
+  // 30s timeout — HF Spaces can take time to wake from sleep
+  timeout: 30000,
 });
 
 // ─── Tasks ────────────────────────────────────────────────────────────────────

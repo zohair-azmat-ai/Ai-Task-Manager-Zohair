@@ -55,7 +55,7 @@ export default function DashboardPage() {
       setRecentTasks(tasksData.slice(0, 5));
     } catch {
       setError(
-        "⚠️ Cannot connect to backend. Start FastAPI: cd backend && uvicorn app.main:app --reload"
+        "⚠️ Cannot connect to backend. Check that the backend service is running and NEXT_PUBLIC_API_URL is set correctly."
       );
     }
     setLoadingStats(false);
