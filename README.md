@@ -4,18 +4,9 @@
 
 ✅ **Live Full-Stack AI Task Manager deployed on Vercel + Hugging Face Spaces**
 
-<!-- 🌐 Live Deployment Badges -->
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-6366f1?style=for-the-badge&logo=vercel&logoColor=white)](https://taskai-zohair.vercel.app/)
-[![Backend API](https://img.shields.io/badge/Backend%20API-HuggingFace-FF9D00?style=for-the-badge&logo=huggingface&logoColor=white)](https://zohairazmat-ai-task-manager-backend.hf.space)
-[![API Docs](https://img.shields.io/badge/API%20Docs-Swagger%20UI-009688?style=for-the-badge&logo=swagger&logoColor=white)](https://zohairazmat-ai-task-manager-backend.hf.space/docs)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-6366f1?style=for-the-badge&logo=vercel&logoColor=white)](https://taskai-zohair.vercel.app/) [![Backend API](https://img.shields.io/badge/Backend%20API-HuggingFace-FF9D00?style=for-the-badge&logo=huggingface&logoColor=white)](https://zohairazmat-ai-task-manager-backend.hf.space) [![API Docs](https://img.shields.io/badge/API%20Docs-Swagger%20UI-009688?style=for-the-badge&logo=swagger&logoColor=white)](https://zohairazmat-ai-task-manager-backend.hf.space/docs)
 
-<!-- 🛠️ Tech Stack Badges -->
-![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688?style=for-the-badge&logo=fastapi&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-3.0-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![SQLite](https://img.shields.io/badge/SQLite-Database-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js&logoColor=white) ![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688?style=for-the-badge&logo=fastapi&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white) ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-3.0-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white) ![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white) ![SQLite](https://img.shields.io/badge/SQLite-Database-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
 
 ---
 
@@ -32,9 +23,7 @@
 
 ## 🎬 Demo Video
 
-[![TaskAI Demo](https://img.youtube.com/vi/_XYQGFO3ruk/maxresdefault.jpg)](https://www.youtube.com/watch?v=_XYQGFO3ruk)
-
-> Click the thumbnail above to watch the full demo on YouTube.
+> 🎥 Demo video will be added soon.
 
 ---
 
@@ -272,17 +261,16 @@ Open `http://localhost:3000` and log in with `demo@taskai.com` / `demo123`.
 
 ## 👤 Author
 
-<table>
-  <tr>
-    <td align="center">
-      <b>Zohair Azmat</b><br/>
-      Full-Stack Developer & AI Enthusiast<br/>
-      <a href="https://github.com/zohair-azmat-ai">GitHub</a>
-    </td>
-  </tr>
-</table>
+---
+
+**Zohair Azmat**
+Full-Stack Developer & AI Enthusiast
+
+🔗 GitHub: [github.com/zohair-azmat-ai](https://github.com/zohair-azmat-ai)
 
 **Stack:** Next.js · TypeScript · FastAPI · Python · SQLAlchemy · OpenAI · Tailwind CSS
+
+---
 
 ---
 
