@@ -328,8 +328,13 @@ ai-task-manager-zohair/
 
 ## 🚀 Deployment
 
-> **Deploy order: Backend first, then Frontend.**
-> You need the backend URL before configuring the frontend.
+> 🟢 **This project is already live and deployed.** The steps below document how it was set up, and can be used to fork and redeploy your own instance.
+
+| Service | Platform | Live URL |
+|---------|----------|----------|
+| Frontend | Vercel | [taskai-zohair.vercel.app](https://taskai-zohair.vercel.app/) |
+| Backend | Hugging Face Spaces | [zohairazmat-ai-task-manager-backend.hf.space](https://zohairazmat-ai-task-manager-backend.hf.space) |
+| API Docs | Swagger UI | [.../docs](https://zohairazmat-ai-task-manager-backend.hf.space/docs) |
 
 ---
 
@@ -342,22 +347,22 @@ ai-task-manager-zohair/
    backend/Dockerfile
    backend/requirements.txt
    backend/app/
-   backend/README.md   ← rename this to README.md at the Space root
+   backend/README.md   ← becomes the Space README
    ```
-4. Push to the Space repo — it will auto-build using the `Dockerfile`
+4. Push to the Space repo — it auto-builds using the `Dockerfile`
 5. In your Space → **Settings → Repository secrets**, add:
 
    | Secret | Value |
    |--------|-------|
-   | `OPENAI_API_KEY` | Your OpenAI key (optional) |
-   | `FRONTEND_URL` | Your Vercel URL (set this after step 2, or use `*`) |
+   | `OPENAI_API_KEY` | Your OpenAI key (optional — app works without it) |
+   | `FRONTEND_URL` | `https://taskai-zohair.vercel.app/` |
    | `SECRET_KEY` | Any long random string |
 
-6. Your backend URL will be:
+6. Your backend will be live at:
    ```
-   https://<your-username>-<space-name>.hf.space
+   https://zohairazmat-ai-task-manager-backend.hf.space
    ```
-   Test it: `https://<your-backend-url>/health` should return `{"status":"healthy"}`
+   Health check: [/health](https://zohairazmat-ai-task-manager-backend.hf.space/health) → `{"status":"healthy"}`
 
 ---
 
@@ -365,47 +370,46 @@ ai-task-manager-zohair/
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
 
-1. Go to [vercel.com](https://vercel.com) → **New Project** → import this GitHub repo
+1. Go to [vercel.com](https://vercel.com) → **New Project** → import the [GitHub repo](https://github.com/zohair-azmat-ai/Ai-Task-Manager-Zohair)
 2. Set **Root Directory** to `frontend`
-3. Add these **Environment Variables** in Vercel:
+3. Add this **Environment Variable** in Vercel:
 
    | Variable | Value |
    |----------|-------|
-   | `BACKEND_URL` | `https://<your-username>-<space-name>.hf.space` |
+   | `NEXT_PUBLIC_API_URL` | `https://zohairazmat-ai-task-manager-backend.hf.space` |
 
-4. Click **Deploy**
-5. Copy your Vercel URL (e.g. `https://your-app.vercel.app`)
+4. Click **Deploy** — frontend goes live at your Vercel URL
 
 ---
 
 ### Step 3 — Connect Backend CORS to Frontend
 
-Go back to your Hugging Face Space secrets and update:
+In your Hugging Face Space → **Settings → Repository secrets**, ensure:
 
 | Secret | Value |
 |--------|-------|
-| `FRONTEND_URL` | `https://your-app.vercel.app` |
+| `FRONTEND_URL` | `https://taskai-zohair.vercel.app/` |
 
-Restart the Space — done.
+Restart the Space — all cross-origin requests will be allowed.
 
 ---
 
 ### Environment Variables Summary
 
-**Backend (Hugging Face Secrets)**
+**Backend — Hugging Face Space Secrets**
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `FRONTEND_URL` | Yes | Your Vercel URL for CORS |
-| `SECRET_KEY` | Yes | Random secret string |
-| `OPENAI_API_KEY` | Optional | Enables GPT; falls back to rule engine |
+| Variable | Required | Value / Description |
+|----------|----------|---------------------|
+| `FRONTEND_URL` | Yes | `https://taskai-zohair.vercel.app/` |
+| `SECRET_KEY` | Yes | Any long random string |
+| `OPENAI_API_KEY` | Optional | Enables GPT; falls back to rule engine if not set |
 | `DATABASE_URL` | Optional | Defaults to `sqlite:///./tasks.db` |
 
-**Frontend (Vercel Environment Variables)**
+**Frontend — Vercel Environment Variables**
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `BACKEND_URL` | Yes | Your Hugging Face Spaces backend URL |
+| Variable | Required | Value |
+|----------|----------|-------|
+| `NEXT_PUBLIC_API_URL` | Yes | `https://zohairazmat-ai-task-manager-backend.hf.space` |
 
 ---
 
