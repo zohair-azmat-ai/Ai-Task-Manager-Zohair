@@ -4,9 +4,18 @@
 
 ✅ **Live Full-Stack AI Task Manager deployed on Vercel + Hugging Face Spaces**
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-6366f1?style=for-the-badge&logo=vercel&logoColor=white)](https://taskai-zohair.vercel.app/) [![Backend API](https://img.shields.io/badge/Backend%20API-HuggingFace-FF9D00?style=for-the-badge&logo=huggingface&logoColor=white)](https://zohairazmat-ai-task-manager-backend.hf.space) [![API Docs](https://img.shields.io/badge/API%20Docs-Swagger%20UI-009688?style=for-the-badge&logo=swagger&logoColor=white)](https://zohairazmat-ai-task-manager-backend.hf.space/docs)
-
-![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js&logoColor=white) ![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688?style=for-the-badge&logo=fastapi&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white) ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-3.0-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white) ![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white) ![SQLite](https://img.shields.io/badge/SQLite-Database-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
+<p align="center">
+  <a href="https://taskai-zohair.vercel.app/"><img src="https://img.shields.io/badge/Live%20Demo-Vercel-6366f1?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo"/></a>
+  <a href="https://zohairazmat-ai-task-manager-backend.hf.space"><img src="https://img.shields.io/badge/Backend%20API-HuggingFace-FF9D00?style=for-the-badge&logo=huggingface&logoColor=white" alt="Backend API"/></a>
+  <a href="https://zohairazmat-ai-task-manager-backend.hf.space/docs"><img src="https://img.shields.io/badge/API%20Docs-Swagger%20UI-009688?style=for-the-badge&logo=swagger&logoColor=white" alt="API Docs"/></a>
+  <br/>
+  <img src="https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js"/>
+  <img src="https://img.shields.io/badge/FastAPI-0.100+-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI"/>
+  <img src="https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript"/>
+  <img src="https://img.shields.io/badge/Tailwind%20CSS-3.0-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS"/>
+  <img src="https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"/>
+  <img src="https://img.shields.io/badge/SQLite-Database-003B57?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQLite"/>
+</p>
 
 ---
 
@@ -23,7 +32,7 @@
 
 ## 🎬 Demo Video
 
-> 🎥 Demo video will be added soon.
+🎥 Demo video coming soon.
 
 ---
 
@@ -59,19 +68,6 @@ Built as a portfolio project demonstrating:
 ## 🏗️ Architecture
 
 ![Architecture](./architecture.png)
-
----
-
-## 🖼️ Screenshots
-
-### 🏠 Landing Page
-The dark hero page with gradient accents and animated feature highlights.
-
-### 🔑 Login Page
-Clean auth form with demo credentials — no registration required.
-
-### 📊 Dashboard
-Full-featured overview with stats cards, AI chatbot panel, smart suggestions, and activity feed — all in a collapsible sidebar layout.
 
 ---
 
